@@ -502,6 +502,11 @@ const AP_Param::GroupInfo SIM::var_info2[] = {
     // @Description: Amplitude scaling of motor noise relative to gyro/accel noise
     AP_GROUPINFO("VIB_MOT_MULT", 63, SIM,  vibe_motor_scale, 1.0f),
 
+    // @Param: ILAB_FAIL
+    // @DisplayName: InertialLabs EAHRS fault injection
+    // @Description: 0=normal, 1=stop transmitting (simulate INS power/link loss)
+    AP_GROUPINFO("ILAB_FAIL", 59, SIM,  il_fail, 0),
+
 
     AP_GROUPEND
 

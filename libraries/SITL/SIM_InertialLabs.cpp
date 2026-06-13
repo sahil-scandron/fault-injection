@@ -240,6 +240,12 @@ void InertialLabs::update(void)
     if (!init_sitl_pointer()) {
         return;
     }
+    // Fault injection: SIM_ILAB_FAIL==1 simulates an abrupt INS power/link loss
+    // (device stops transmitting -> driver's last_att_ms goes stale ->
+    //  AP_ExternalAHRS_InertialLabs::healthy() returns false after 100ms).
+    if (_sitl->il_fail == 1) {
+        return;
+    }
     const uint32_t us_between_packets = 5000; // 200Hz
     const uint32_t now = AP_HAL::micros();
     if (now - last_pkt_us >= us_between_packets) {
